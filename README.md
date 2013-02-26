@@ -1,9 +1,9 @@
+![textmate](https://raw.github.com/pabragin/SocialNet/master/images/failbook.png)
+
 SocialNet
 =========
 
 Репозиторий содержит исходные коды программы "SocialNet", социальной сети разрабатываемой в рамках курсового проекта по курсу "Проектирование архитектур ПО".
-
-![textmate](https://raw.github.com/pabragin/SocialNet/master/images/failbook.png)
 
 ##Содержание:
 
