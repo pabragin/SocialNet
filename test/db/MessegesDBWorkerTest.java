@@ -39,8 +39,8 @@ public class MessegesDBWorkerTest {
     @Test
     public void testInsertPrivateMessage() throws Exception {
         System.out.println("insertPrivateMessage");
-        User from = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student");
-        User to = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan");
+        User from = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
+        User to = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123");
         String message = "Hello Sergey";
         MessagesDBWorker instance = new MessagesDBWorker();
         instance.insertPrivateMessage(from, to, message);
@@ -52,7 +52,7 @@ public class MessegesDBWorkerTest {
     @Test
     public void testInsertGroupMessage() throws Exception {
         System.out.println("insertGroupMessage");
-        User from = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student");
+        User from = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
         Group to = new Group(0, "Avtovaz", "avto auto", 0);
         String message = "Hello Avtovaz";
         MessagesDBWorker instance = new MessagesDBWorker();
@@ -131,16 +131,5 @@ public class MessegesDBWorkerTest {
         String expResult = "Hello Avtovaz";
         ArrayList<GroupMessage> result = instance.GetGroupMessageTo(toid);
         assertEquals(expResult, result.get(result.size()-1).getMessageData());
-    }
-    
-    /**
-     * Test of DeleteMessege method, of class MessegesDBWorker.
-     */
-    @Test
-    public void testDeleteMessege() throws Exception {
-        System.out.println("DeleteMessege");
-        MessagesDBWorker instance = new MessagesDBWorker();
-        //instance.DeleteMessage(id1);
-        //instance.DeleteMessage(id2);
     }
 }

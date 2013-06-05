@@ -32,7 +32,7 @@ public class RequestTest {
     @Test
     public void testConfirm() {
         System.out.println("confirm");
-        Request instance = new Request(new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student"), new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan"));
+        Request instance = new Request(new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123"), new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123"));
         instance.confirm();
     }
 }

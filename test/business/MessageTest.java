@@ -32,7 +32,7 @@ public class MessageTest {
     @Test
     public void testGetMessageID() {
         System.out.println("getMessageID");
-        Message instance = new Message(0, new User(0,"Pavel", "Bragin", "Sosnovy Bor", "Student"),"Hello world");
+        Message instance = new Message(0, new User(0,"Pavel", "Bragin", "Sosnovy Bor", "Student", "123"),"Hello world");
         int expResult = 0;
         int result = instance.getMessageID();
         assertEquals(expResult, result);
@@ -44,7 +44,7 @@ public class MessageTest {
     @Test
     public void testGetMessageData() {
         System.out.println("getMessageData");
-        Message instance = new Message(0, new User(0,"Pavel", "Bragin", "Sosnovy Bor", "Student"),"Hello world");
+        Message instance = new Message(0, new User(0,"Pavel", "Bragin", "Sosnovy Bor", "Student", "123"),"Hello world");
         String expResult = "Hello world";
         String result = instance.getMessageData();
         assertEquals(expResult, result);
@@ -53,7 +53,7 @@ public class MessageTest {
     @Test
     public void testGetMessageDate() {
         System.out.println("getMessageDate");
-        Message instance = new Message(0, new User(0,"Pavel", "Bragin", "Sosnovy Bor", "Student"),"Hello world");
+        Message instance = new Message(0, new User(0,"Pavel", "Bragin", "Sosnovy Bor", "Student", "123"),"Hello world");
         System.out.println(instance.getMessageDate().toString());
     }
 }

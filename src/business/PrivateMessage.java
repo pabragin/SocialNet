@@ -16,8 +16,8 @@ public class PrivateMessage extends Message{
         this.to=to;
     }
     
-    /*public String getMessageData()
+    public User getDest()
     {
-        return this.data;
-    }*/
+        return this.to;
+    }
 }

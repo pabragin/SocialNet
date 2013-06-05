@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class Admin extends User{
     
-    public Admin(String firstName, String lastName, String city, String about, int oldID, ArrayList<User> friends, ArrayList<PrivateMessage> inMess, ArrayList<PrivateMessage> outMess, ArrayList<Group> groups){
-        super(oldID, firstName, lastName, city, about);
+    public Admin(String firstName, String lastName, String city, String about, int oldID, ArrayList<User> friends, ArrayList<PrivateMessage> inMess, ArrayList<PrivateMessage> outMess, ArrayList<Group> groups, String password){
+        super(oldID, firstName, lastName, city, about, password);
         
         this.friends=friends;
         this.inMessages=inMess;

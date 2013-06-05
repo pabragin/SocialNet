@@ -24,7 +24,7 @@ public class UserDBWorker {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             connect = DriverManager.getConnection("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
-            String query = "CREATE TABLE APP.USERS (\"ID\" INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),\"FIRSTNAME\" VARCHAR(50),\"LASTNAME\" VARCHAR(50),\"CITY\" VARCHAR(50),\"ABOUT\" VARCHAR(400))";
+            String query = "CREATE TABLE APP.USERS (\"ID\" INT not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),\"FIRSTNAME\" VARCHAR(50),\"LASTNAME\" VARCHAR(50),\"CITY\" VARCHAR(50),\"ABOUT\" VARCHAR(400), \"PASS\" VARCHAR(50))";
             PreparedStatement stat = connect.prepareStatement(query);
             stat.executeUpdate();
             
@@ -76,6 +76,7 @@ public class UserDBWorker {
             String LName=null;
             String City=null;
             String About=null;
+            String pass = null;
             
             while (result.next()) {
                 id = result.getInt("ID");
@@ -83,14 +84,76 @@ public class UserDBWorker {
                 LName = result.getString("LASTNAME");
                 City = result.getString("CITY");
                 About = result.getString("ABOUT");
+                pass = result.getString("PASS");
                 
                 return new User(            id,
                                             FName,
                                             LName,
                                             City,
-                                            About);
+                                            About,
+                                            pass);
                 }
                 return null;
+            }
+            catch (SQLException e) {
+            throw new DataDBException("Error occurred while finding users by ID", e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            close();
+        }
+    }
+    
+    public boolean passCompare(final int ID, String password) throws DataDBException{
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+
+            String query = "SELECT * from APP.USERS where ID=?";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1, ID);
+            ResultSet result = statement.executeQuery();
+
+            String pass = null;
+            
+            while (result.next()) {
+                pass = result.getString("PASS");
+                }
+            
+            return pass.contentEquals(password);
+            }
+            catch (SQLException e) {
+            throw new DataDBException("Error occurred while finding users by ID", e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            close();
+        }
+    }
+    
+    public boolean IdExist(final int ID) throws DataDBException{
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+
+            String query = "SELECT COUNT(ID) from APP.USERS where ID=?";
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1, ID);
+            ResultSet result = statement.executeQuery();
+
+            int count=0;
+            result.next();
+            count = result.getInt(1);
+            if (count == 0)
+                return false;
+            else
+                return true;
             }
             catch (SQLException e) {
             throw new DataDBException("Error occurred while finding users by ID", e);
@@ -119,6 +182,7 @@ public class UserDBWorker {
             String LName=null;
             String City=null;
             String About=null;
+            String pass=null;
             ArrayList<User> LU = new ArrayList<>();
             
             while (result.next()) {
@@ -127,7 +191,8 @@ public class UserDBWorker {
                 LName = result.getString("LASTNAME");
                 City = result.getString("CITY");
                 About = result.getString("ABOUT");
-                LU.add(new User(id,FName,LName,City,About));
+                pass = result.getString("PASS");
+                LU.add(new User(id,FName,LName,City,About, pass));
                 }
                 return LU;
             }
@@ -142,6 +207,7 @@ public class UserDBWorker {
             close();
         }
     }
+    
     
     public ArrayList<User> findByLastName(final String Name) throws DataDBException{
         Connection conn = null;
@@ -158,6 +224,7 @@ public class UserDBWorker {
             String LName=null;
             String City=null;
             String About=null;
+            String pass = null;
             ArrayList<User> LU = new ArrayList<>();
             
             while (result.next()) {
@@ -166,7 +233,8 @@ public class UserDBWorker {
                 LName = result.getString("LASTNAME");
                 City = result.getString("CITY");
                 About = result.getString("ABOUT");
-                LU.add(new User(id,FName,LName,City,About));
+                pass = result.getString("PASS");
+                LU.add(new User(id,FName,LName,City,About, pass));
                 }
             
                 return LU;
@@ -198,6 +266,7 @@ public class UserDBWorker {
             String LName=null;
             String City=null;
             String About=null;
+            String pass = null;
             ArrayList<User> LU=new ArrayList<>();
             
             while (result.next()) {
@@ -206,7 +275,8 @@ public class UserDBWorker {
                 LName = result.getString("LASTNAME");
                 City = result.getString("CITY");
                 About = result.getString("ABOUT");
-                LU.add(new User(id,FName,LName,City,About));
+                pass = result.getString("PASS");
+                LU.add(new User(id,FName,LName,City,About, pass));
                 }
             
                 return LU;
@@ -223,19 +293,60 @@ public class UserDBWorker {
         }
     }
     
+    public ArrayList<User> getAllUsers() throws DataDBException{
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+
+            String query = "SELECT * from APP.USERS";
+            PreparedStatement stat = conn.prepareStatement(query);
+            ResultSet result = stat.executeQuery();
+
+            int id=0;
+            String FName=null;
+            String LName=null;
+            String City=null;
+            String About=null;
+            String pass = null;
+            ArrayList<User> LU=new ArrayList<>();
+            
+            while (result.next()) {
+                id = result.getInt("ID");
+                FName = result.getString("FIRSTNAME");
+                LName = result.getString("LASTNAME");
+                City = result.getString("CITY");
+                About = result.getString("ABOUT");
+                pass = result.getString("PASS");
+                LU.add(new User(id,FName,LName,City,About, pass));
+                }
+            
+                return LU;
+            }
+            catch (SQLException e) {
+            throw new DataDBException("Error occurred while finding users by city", e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            close();
+        }
+    }
     
-    public int insertUser(String FName, String LName, String City, String About) throws DataDBException{
+    public int insertUser(String FName, String LName, String City, String About, String pass) throws DataDBException{
         Connection connect = null;
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             connect = DriverManager.getConnection("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
-            String query = "INSERT into APP.USERS (FIRSTNAME, LASTNAME, CITY, ABOUT) VALUES (?, ?, ?, ?)";
+            String query = "INSERT into APP.USERS (FIRSTNAME, LASTNAME, CITY, ABOUT, PASS) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stat = connect.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 
             stat.setString(1, FName);
             stat.setString(2, LName);
             stat.setString(3, City);
             stat.setString(4, About);
+            stat.setString(5, pass);
             stat.executeUpdate();
             
             ResultSet res = stat.getGeneratedKeys();
@@ -290,44 +401,4 @@ public class UserDBWorker {
             System.out.println("Connection to database lost");
         }
     }
-     
-     public static void main(String[] args) throws Exception {
-        MessagesDBWorker dao = new MessagesDBWorker();
-        dao.deleteMessagesTable();
-        dao.createMessagesTable();
-    
-         
-         /*UserDBWorker udb = new UserDBWorker();
-         udb.deleteUserTable();
-         udb.createUserTable();
-         udb.insertUser("Pavel", "Bragin", "Sosnovy Bor", "Student");
-         udb.insertUser("Sergey", "Tkachenko", "Sosnovy Bor", "Student");*/
-        //dao.insertUser("Sergey", "Tkachen", "Hanty", "Zadrot");
-        //dao.findById(0);
-        
-        
-        
-        //dao.createUserTable();
-        
-        //System.out.println(dao.insertGroup("Lala", "LALALA ALla", 0));
-        
-        //dao.createFriendshipTable();
-        
-        //dao.ApproveRequest(1, 0);
-        
-        //dao.DeleteFriend(0,1);
-        /*dao.addRequest(0, 1);
-        dao.addRequest(0, 2);
-        dao.addRequest(0, 3);
-        dao.addRequest(1, 0);*/
-        //dao.createGroupTable();
-        //dao.insertGroup("Avtovaz", "This group about cars by avtovaz", 0);
-        //System.out.println(dao.findByName("Avtovaz").size());
-        
-        //dao.deleteFriendshipTable();
-        
-        //System.out.println(dao.findById(0).getFirstName());
-        
-    }
-    
 }

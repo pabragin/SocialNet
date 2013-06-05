@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<cities>
+	<city>
+		<firstcity>Sosnovy Bor</firstcity>
+		<secondcity>Piter</secondcity>
+		<length>80</length>
+	</city>
+	<city>
+		<firstcity>Piter</firstcity>
+		<secondcity>Sosnovy Bor</secondcity>
+		<length>80</length>
+	</city>
+	<city>
+		<firstcity>Piter</firstcity>
+		<secondcity>Hanty</secondcity>
+		<length>1000</length>
+	</city>
+	<city>
+		<firstcity>Hanty</firstcity>
+		<secondcity>Piter</secondcity>
+		<length>1000</length>
+	</city>
+	<city>
+		<firstcity>Sosnovy Bor</firstcity>
+		<secondcity>Hanty</secondcity>
+		<length>900</length>
+	</city>
+	<city>
+		<firstcity>Hanty</firstcity>
+		<secondcity>Sosnovy Bor</secondcity>
+		<length>900</length>
+	</city>
+</cities>

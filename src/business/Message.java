@@ -30,6 +30,10 @@ public class Message {
         return messageID;
     }
     
+    public User getSender()
+    {
+        return this.from;
+    }
     public String getMessageData()
     {
         return data;

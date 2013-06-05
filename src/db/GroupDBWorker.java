@@ -160,6 +160,42 @@ public class GroupDBWorker {
         }
     }
     
+    public ArrayList<Group> getAllGroups() throws DataDBException{
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+
+            String query = "SELECT * from APP.GROUPS";
+            PreparedStatement stat = conn.prepareStatement(query);
+            ResultSet result = stat.executeQuery();
+            
+            int id=0;
+            String N=null;
+            String About=null;
+            int AdminId=0;
+            ArrayList<Group> LG = new ArrayList<>();
+            
+            while (result.next()) {
+                id = result.getInt("ID");
+                N = result.getString("NAME");
+                About = result.getString("ABOUT");
+                AdminId = result.getInt("ADMINID");
+                LG.add(new Group(id,N,About,AdminId));
+                }
+                return LG;
+            }
+            catch (SQLException e) {
+            throw new DataDBException("Error occurred while getting groups", e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            close();
+        }
+    }
+    
     public int insertGroup(String Name, String About, int AdminId) throws DataDBException{
         Connection connect = null;
         try {

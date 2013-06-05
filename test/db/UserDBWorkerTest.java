@@ -17,8 +17,6 @@ import org.junit.BeforeClass;
  */
 public class UserDBWorkerTest {
     
-    int id1=0, id2=0;
-    
     public UserDBWorkerTest() {
     }
 
@@ -37,16 +35,20 @@ public class UserDBWorkerTest {
     public void testInsertUser() throws Exception {
         System.out.println("insertUser");
         UserDBWorker instance = new UserDBWorker();
+        int id1, id2;
         String FName = "Pavel";
         String LName = "Bragin";
         String City = "Sosnovy Bor";
         String About = "Student";
-        id1= instance.insertUser(FName, LName, City, About);
+        String pass = "123";
+        id1= instance.insertUser(FName, LName, City, About, pass);
         FName = "Sergey";
         LName = "Tkachenko";
         City = "Hanty";
         About = "AnimeFan";
-        id2 = instance.insertUser(FName, LName, City, About);
+        id2 = instance.insertUser(FName, LName, City, About, pass);
+        instance.DeleteUser(id1);
+        instance.DeleteUser(id2);
     }
     
     /**
@@ -91,14 +93,6 @@ public class UserDBWorkerTest {
         String Ci = "Sosnovy Bor";
         UserDBWorker instance = new UserDBWorker();
         ArrayList result = instance.findByCity(Ci);
-    }
-    
-    @Test
-    public void testDeleteUser() throws Exception {
-        System.out.println("DeleteUser");
-        UserDBWorker instance = new UserDBWorker();
-        instance.DeleteUser(id1);
-        instance.DeleteUser(id2);
     }
     
 }

@@ -32,7 +32,7 @@ public class UserTest {
     @Test
     public void testGetID() {
         System.out.println("getID");
-        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student");
+        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
         int expResult = 0;
         int result = instance.getID();
         assertEquals(expResult, result);
@@ -44,7 +44,7 @@ public class UserTest {
     @Test
     public void testGetFirstName() {
         System.out.println("getFirstName");
-        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student");
+        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
         String expResult = "Pavel";
         String result = instance.getFirstName();
         assertEquals(expResult, result);
@@ -56,7 +56,7 @@ public class UserTest {
     @Test
     public void testGetLastName() {
         System.out.println("getLastName");
-        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student");
+        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
         String expResult = "Bragin";
         String result = instance.getLastName();
         assertEquals(expResult, result);
@@ -68,7 +68,7 @@ public class UserTest {
     @Test
     public void testGetCity() {
         System.out.println("getCity");
-        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student");
+        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
         String expResult = "Sosnovy Bor";
         String result = instance.getCity();
         assertEquals(expResult, result);
@@ -80,7 +80,7 @@ public class UserTest {
     @Test
     public void testGetAbout() {
         System.out.println("getAbout");
-        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student");
+        User instance = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
         String expResult = "Student";
         String result = instance.getAbout();
         assertEquals(expResult, result);
@@ -92,8 +92,8 @@ public class UserTest {
     @Test
     public void testAddFriend() {
         System.out.println("addFriend");
-        User user = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student");
-        User instance = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan");
+        User user = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
+        User instance = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123");
         instance.addFriend(user);
     }
 
@@ -103,8 +103,8 @@ public class UserTest {
     @Test
     public void testAddRequest() {
         System.out.println("addRequest");
-        Request reg = new Request(new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student"), new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan"));
-        User instance = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan");
+        Request reg = new Request(new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123"), new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123"));
+        User instance = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123");
         instance.addRequest(reg);
     }
 
@@ -115,8 +115,8 @@ public class UserTest {
     public void testConfirmReq() {
         System.out.println("confirmReq");
         int regNum = 0;
-        Request reg = new Request(new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student"), new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan"));
-        User instance = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan");
+        Request reg = new Request(new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123"), new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123"));
+        User instance = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123");
         instance.addRequest(reg);
         instance.confirmReq(regNum);
     }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class User {
     protected int userID;
+    protected String password;
     protected String firstName;
     protected String lastName;
     protected String city;
@@ -22,7 +23,7 @@ public class User {
     protected ArrayList<Request> regs;
     protected ArrayList<Group> groups;
     
-    public User(int uID, String firstName, String lastName, String city, String about)
+    public User(int uID, String firstName, String lastName, String city, String about, String password)
     {
         assert(firstName!=null);
         assert(lastName!=null);
@@ -65,6 +66,11 @@ public class User {
     public String getAbout()
     {
         return this.about;
+    }
+    
+    public String getPass()
+    {
+        return this.password;
     }
     
     public ArrayList getFriends()
