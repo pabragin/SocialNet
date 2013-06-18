@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/gui/AboutUserJPanel.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/gui/CreateMessageJPanel.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/db/MessagesDBWorker.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/business/Message.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/gui/UsersJPanel.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/business/Group.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/ServiceLayer/HttpServer.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/gui/FriendsJPanel.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/gui/UserJFrame.java</file>
+        <file>file:/C:/OTHER/Study/5th/2-sem/TRP/SocialNet/src/business/User.java</file>
+    </open-files>
 </project-private>

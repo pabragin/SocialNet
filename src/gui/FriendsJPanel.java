@@ -72,14 +72,15 @@ public class FriendsJPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
+        jButton4 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setText("ID");
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton3.setText("Удалить");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +90,7 @@ public class FriendsJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Name");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton2.setText("Написать");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,14 +98,15 @@ public class FriendsJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Посмотреть");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jScrollPane2.setViewportView(jList2);
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jButton4.setText("Посмотреть");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
-
-        jScrollPane2.setViewportView(jList2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,8 +125,8 @@ public class FriendsJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,7 +139,7 @@ public class FriendsJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButton4)
                         .addGap(8, 8, 8)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,21 +173,6 @@ public class FriendsJPanel extends javax.swing.JPanel {
         crMessPan.setVisible(false);
         jPanel1.setVisible(true);
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try
-        {
-            aboutUserJPanel.addContent(FL.get(jList2.getSelectedIndex()));
-            jPanel1.setVisible(false);
-            aboutUserJPanel.setVisible(true);
-            aboutUserJPanel.addLength(user, FL.get(jList2.getSelectedIndex()));
-        }
-        catch(ArrayIndexOutOfBoundsException e)
-        {
-            JOptionPane.showMessageDialog(null, "Никто не выбран", "Ошибка", 1);
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        try
         {
@@ -199,6 +187,7 @@ public class FriendsJPanel extends javax.swing.JPanel {
             } catch (DataDBException ex) {
                 Logger.getLogger(MessegesJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
+            updateElements();
             jList2.updateUI();
         }
         catch(ArrayIndexOutOfBoundsException e)
@@ -222,10 +211,24 @@ public class FriendsJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try
+        {
+            aboutUserJPanel.addContent(FL.get(jList2.getSelectedIndex()));
+            jPanel1.setVisible(false);
+            aboutUserJPanel.setVisible(true);
+            aboutUserJPanel.addLength(user, FL.get(jList2.getSelectedIndex()));
+        }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            JOptionPane.showMessageDialog(null, "Никто не выбран", "Ошибка", 1);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList2;

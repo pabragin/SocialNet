@@ -72,6 +72,7 @@ public class UsersJPanel extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton1.setText("Добавить");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +86,7 @@ public class UsersJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Name");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton2.setText("Посмотреть");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -80,6 +80,7 @@ public class GroupJPanel1 extends javax.swing.JPanel {
 
         jLabel1.setText("ID");
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton3.setText("Удалить");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +90,7 @@ public class GroupJPanel1 extends javax.swing.JPanel {
 
         jLabel2.setText("Name");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton2.setText("Создать");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +98,7 @@ public class GroupJPanel1 extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jButton1.setText("Посмотреть");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +108,7 @@ public class GroupJPanel1 extends javax.swing.JPanel {
 
         jScrollPane2.setViewportView(jList2);
 
+        incomeButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         incomeButton.setText("Вступить");
         incomeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

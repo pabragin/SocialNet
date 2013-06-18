@@ -21,6 +21,8 @@ import org.junit.BeforeClass;
 public class MessegesDBWorkerTest {
     
     int id1=0, id2=0;
+    int messageId=0;
+    int groupMessageId=0;
     
     public MessegesDBWorkerTest() {
     }
@@ -31,6 +33,7 @@ public class MessegesDBWorkerTest {
 
     @AfterClass
     public static void tearDownClass() throws Exception {
+        
     }
 
      /**
@@ -43,7 +46,7 @@ public class MessegesDBWorkerTest {
         User to = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123");
         String message = "Hello Sergey";
         MessagesDBWorker instance = new MessagesDBWorker();
-        instance.insertPrivateMessage(from, to, message);
+        messageId=instance.insertPrivateMessage(from, to, message);
     }
 
     /**
@@ -56,18 +59,7 @@ public class MessegesDBWorkerTest {
         Group to = new Group(0, "Avtovaz", "avto auto", 0);
         String message = "Hello Avtovaz";
         MessagesDBWorker instance = new MessagesDBWorker();
-        instance.insertGroupMessage(from, to, message);
-    }
-    
-    /**
-     * Test of GetPrivateMessageById method, of class MessegesDBWorker.
-     */
-    @Test
-    public void testGetPrivateMessageById() throws Exception {
-        System.out.println("GetPrivateMessageById");
-        int ID = 0;
-        MessagesDBWorker instance = new MessagesDBWorker();
-        PrivateMessage result = instance.GetPrivateMessageById(ID);
+        groupMessageId=instance.insertGroupMessage(from, to, message);
     }
 
     /**
@@ -78,7 +70,7 @@ public class MessegesDBWorkerTest {
         System.out.println("GetGroupMessageById");
         int ID = 0;
         MessagesDBWorker instance = new MessagesDBWorker();
-        GroupMessage result = instance.GetGroupMessageById(ID);
+        GroupMessage result = instance.GetGroupMessageById(groupMessageId);
     }
 
     /**
@@ -106,30 +98,11 @@ public class MessegesDBWorkerTest {
         ArrayList<PrivateMessage> result = instance.GetPrivateMessageTo(toid);
         assertEquals(expResult, result.get(result.size()-1).getMessageData());
     }
-
-    /**
-     * Test of GetGroupMessageFrom method, of class MessegesDBWorker.
-     */
+    
     @Test
-    public void testGetGroupMessageFrom() throws Exception {
-        System.out.println("GetGroupMessageFrom");
-        int fromid = 0;
+    public void testDeleteMessage() throws Exception {
         MessagesDBWorker instance = new MessagesDBWorker();
-        String expResult = "Hello Avtovaz";
-        ArrayList<GroupMessage> result = instance.GetGroupMessageFrom(fromid);
-        assertEquals(expResult, result.get(result.size()-1).getMessageData());
-    }
-
-    /**
-     * Test of GetGroupMessageTo method, of class MessegesDBWorker.
-     */
-    @Test
-    public void testGetGroupMessageTo() throws Exception {
-        System.out.println("GetGroupMessageTo");
-        int toid = 0;
-        MessagesDBWorker instance = new MessagesDBWorker();
-        String expResult = "Hello Avtovaz";
-        ArrayList<GroupMessage> result = instance.GetGroupMessageTo(toid);
-        assertEquals(expResult, result.get(result.size()-1).getMessageData());
+        instance.DeleteMessage(messageId);
+        instance.DeleteMessage(groupMessageId);
     }
 }
