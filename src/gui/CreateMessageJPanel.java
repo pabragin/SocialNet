@@ -4,10 +4,12 @@
  */
 package gui;
 
+import ServiceLayer.MessageCatalog;
+import ServiceLayer.MessageException;
 import business.PrivateMessage;
 import business.User;
 import db.DataDBException;
-import db.MessagesDBWorker;
+import db.MessagesDBMapper;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +27,7 @@ public class CreateMessageJPanel extends javax.swing.JPanel {
     
     private User user;
     private User to;
-    private MessagesDBWorker mdb;
+    private MessageCatalog mdb;
     private ArrayList<PrivateMessage> LM;
     
     public CreateMessageJPanel() {
@@ -37,10 +39,10 @@ public class CreateMessageJPanel extends javax.swing.JPanel {
     {
         user =from;
         to = toto;
-        mdb = new MessagesDBWorker();
+        mdb = new MessageCatalog();
         try {
-            LM = mdb.GetPrivateMessageTo(user.getID());
-        } catch (DataDBException ex) {
+            LM = mdb.GetPrivateMessageTo(user);
+        } catch (MessageException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при создании сообщения!", "Ошибка", 1);
         }
     }
@@ -99,7 +101,7 @@ public class CreateMessageJPanel extends javax.swing.JPanel {
         try {
             mdb.insertPrivateMessage(user, to, jTextArea1.getText());
             JOptionPane.showMessageDialog(null, "Сообщение успешно отправлено!", "Успех!", 1);
-        } catch (DataDBException ex) {
+        } catch (MessageException ex) {
             JOptionPane.showMessageDialog(null, "Сообщение не может быть отправлено!", "Ошибка!", 1);
         }
     }//GEN-LAST:event_sendButton1ActionPerformed

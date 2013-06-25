@@ -4,10 +4,10 @@
  */
 package gui;
 
-import ServiceLayer.HttpServer;
+import ServiceLayer.UserCatalog;
+import ServiceLayer.UserException;
 import business.User;
 import db.DataDBException;
-import db.UserDBWorker;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -195,7 +195,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        UserDBWorker udb = new UserDBWorker();
+        UserCatalog udb = new UserCatalog();
         if (!"".equals(jTextField1.getText()) && !"".equals(jTextField2.getText()))
         {
             try {
@@ -226,8 +226,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 {
                     jTextField2.setBackground(Color.red);
                 }
-            } catch (DataDBException ex) {
-                Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UserException ex) {
                 jTextField1.setBackground(Color.red);
                 jTextField2.setBackground(Color.red);
             }
@@ -235,7 +234,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        UserDBWorker udb = new UserDBWorker();
+        UserCatalog udb = new UserCatalog();
         int id=0;
             try {
                 jTextField3.setBackground(Color.WHITE);
@@ -278,8 +277,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(null, "Your ID is "+String.valueOf(id), "ID", 1);
               
-            } catch (DataDBException ex) {
-                Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UserException ex) {
                 jTextField1.setBackground(Color.red);
                 jTextField2.setBackground(Color.red);
             }

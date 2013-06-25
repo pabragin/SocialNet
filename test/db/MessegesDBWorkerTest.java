@@ -45,7 +45,7 @@ public class MessegesDBWorkerTest {
         User from = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
         User to = new User(1,"Sergey","Tkachenko", "Hanty", "AnimeFan", "123");
         String message = "Hello Sergey";
-        MessagesDBWorker instance = new MessagesDBWorker();
+        MessagesDBMapper instance = new MessagesDBMapper();
         messageId=instance.insertPrivateMessage(from, to, message);
     }
 
@@ -58,7 +58,7 @@ public class MessegesDBWorkerTest {
         User from = new User(0,"Pavel","Bragin", "Sosnovy Bor", "Student", "123");
         Group to = new Group(0, "Avtovaz", "avto auto", 0);
         String message = "Hello Avtovaz";
-        MessagesDBWorker instance = new MessagesDBWorker();
+        MessagesDBMapper instance = new MessagesDBMapper();
         groupMessageId=instance.insertGroupMessage(from, to, message);
     }
 
@@ -69,7 +69,7 @@ public class MessegesDBWorkerTest {
     public void testGetGroupMessageById() throws Exception {
         System.out.println("GetGroupMessageById");
         int ID = 0;
-        MessagesDBWorker instance = new MessagesDBWorker();
+        MessagesDBMapper instance = new MessagesDBMapper();
         GroupMessage result = instance.GetGroupMessageById(groupMessageId);
     }
 
@@ -80,7 +80,7 @@ public class MessegesDBWorkerTest {
     public void testGetPrivateMessageFrom() throws Exception {
         System.out.println("GetPrivateMessageFrom");
         int fromid = 0;
-        MessagesDBWorker instance = new MessagesDBWorker();
+        MessagesDBMapper instance = new MessagesDBMapper();
         String expResult = "Hello Sergey";
         ArrayList<PrivateMessage> result = instance.GetPrivateMessageFrom(fromid);
         assertEquals(expResult, result.get(result.size()-1).getMessageData());
@@ -93,7 +93,7 @@ public class MessegesDBWorkerTest {
     public void testGetPrivateMessageTo() throws Exception {
         System.out.println("GetPrivateMessageTo");
         int toid = 1;
-        MessagesDBWorker instance = new MessagesDBWorker();
+        MessagesDBMapper instance = new MessagesDBMapper();
         String expResult = "Hello Sergey";
         ArrayList<PrivateMessage> result = instance.GetPrivateMessageTo(toid);
         assertEquals(expResult, result.get(result.size()-1).getMessageData());
@@ -101,7 +101,7 @@ public class MessegesDBWorkerTest {
     
     @Test
     public void testDeleteMessage() throws Exception {
-        MessagesDBWorker instance = new MessagesDBWorker();
+        MessagesDBMapper instance = new MessagesDBMapper();
         instance.DeleteMessage(messageId);
         instance.DeleteMessage(groupMessageId);
     }

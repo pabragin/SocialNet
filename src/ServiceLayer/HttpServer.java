@@ -10,8 +10,6 @@ package ServiceLayer;
  */
 
 import business.User;
-import db.FriendshipDBWorker;
-import db.UserDBWorker;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.InputStream;
@@ -63,15 +61,14 @@ public class HttpServer {
             try {
                 readInputHeaders();
                 String resp = new String();
-                FriendshipDBWorker fdb = new FriendshipDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
-                UserDBWorker udb = new UserDBWorker();
+                UserCatalog uc = new UserCatalog();
                 ArrayList<User> LU = new ArrayList<>();
-                LU = udb.getAllUsers();
+                LU = uc.getAllUsers();
                 List<Item> list = new ArrayList<Item>();
                 for(int i=0; i<LU.size(); i++)
                 {
-                    list.add(new Item(fdb.GetFriends(LU.get(i).getID()).size(), LU.get(i)));
-                    System.out.println(fdb.GetFriends(LU.get(i).getID()).size());
+                    list.add(new Item(uc.getFriends(LU.get(i)).size(), LU.get(i)));
+                    System.out.println(uc.getFriends(LU.get(i)).size());
                 }
                 Collections.sort(list, new Comparator<Item>() {
                     @Override

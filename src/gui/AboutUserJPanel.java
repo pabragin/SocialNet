@@ -170,24 +170,10 @@ public class AboutUserJPanel extends javax.swing.JPanel {
     
     public void addLength(User current, User view)
     {
-        ArrayList<LengthCity> LL= new ArrayList<>();
-        LL = new ReadXML().getAllLength();
-        boolean find=false;
-        int i=0;
-        System.out.println(LL.size());
-        for(i=0; i<LL.size(); i++)
+        ReadXML rxml = new ReadXML();
+        if(rxml.lengthExist(current, view))
         {
-            
-            System.out.println(LL.get(i).fName+" "+(current.getCity()) + " "+ LL.get(i).sName+" "+(view.getCity()));
-            if((LL.get(i).fName == null ? (current.getCity()) == null : LL.get(i).fName.equals(current.getCity())) && (LL.get(i).sName == null ? (view.getCity()) == null : LL.get(i).sName.equals(view.getCity())))
-            {
-                find=true;
-                break;
-            }
-        }
-        if(find)
-        {
-            jLabelLength.setText(String.valueOf(LL.get(i).length) + "км");
+            jLabelLength.setText(String.valueOf(rxml.getLength(current, view)) + "км");
             jLabel1.setVisible(true);
             jLabelLength.setVisible(true);
         }

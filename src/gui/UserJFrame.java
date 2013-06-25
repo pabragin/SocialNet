@@ -4,10 +4,10 @@
  */
 package gui;
 
+import ServiceLayer.UserCatalog;
+import ServiceLayer.UserException;
 import business.User;
 import db.DataDBException;
-import db.FriendshipDBWorker;
-import db.MessagesDBWorker;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -189,12 +189,11 @@ public class UserJFrame extends javax.swing.JFrame {
 
     private void updateInfo()
     {
-        MessagesDBWorker mDBW = new MessagesDBWorker();
-        FriendshipDBWorker fDBW = new FriendshipDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+        UserCatalog uc = new UserCatalog();
         int countUser=0;
         try {
-            countUser = fDBW.GetRequestTo(currentUser.getID()).size();
-        } catch (DataDBException ex) {
+            countUser = uc.getRequestTo(currentUser).size();
+        } catch (UserException ex) {
             Logger.getLogger(UserJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         userPlus.setText("+"+String.valueOf(countUser));
@@ -232,11 +231,7 @@ public class UserJFrame extends javax.swing.JFrame {
         this.add(groupJPanel);
         groupJPanel.setVisible(false);
         
-        try {
             usersJPanel = new UsersJPanel(user);
-        } catch (DataDBException ex) {
-            Logger.getLogger(UserJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
         this.add(usersJPanel);
         usersJPanel.setVisible(false);
         updateInfo();

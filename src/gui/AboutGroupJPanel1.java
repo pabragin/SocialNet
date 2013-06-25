@@ -4,12 +4,16 @@
  */
 package gui;
 
+import ServiceLayer.GroupCatalog;
+import ServiceLayer.GroupException;
+import ServiceLayer.MessageCatalog;
+import ServiceLayer.MessageException;
 import business.Group;
 import business.GroupMessage;
 import business.User;
 import db.DataDBException;
-import db.MessagesDBWorker;
-import db.groupInvDBWorker;
+import db.MessagesDBMapper;
+import db.GroupInvDBMapper;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -152,7 +156,7 @@ public class AboutGroupJPanel1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     private User user;
     private Group group;
-    MessagesDBWorker mdb = new MessagesDBWorker();
+    MessageCatalog mdb = new MessageCatalog();
     Vector elements = new Vector<String>();
     ArrayList<GroupMessage> GML = new ArrayList<>();
     
@@ -162,11 +166,11 @@ public class AboutGroupJPanel1 extends javax.swing.JPanel {
                 mdb.insertGroupMessage(user, group, jTextField1.getText());
             else
                 JOptionPane.showMessageDialog(null, "Невозможно отправить пустое сообщение!", "Ошибка", 1);
-        } catch (DataDBException ex) {
+        } catch (MessageException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при отправке сообщения!", "Ошибка", 1);
         }
         try {
-            GML = mdb.GetGroupMessageTo(group.getID());
+            GML = mdb.GetGroupMessageTo(group);
             int size = GML.size();
             for(int i=0;i<size;i++)
             {
@@ -174,7 +178,7 @@ public class AboutGroupJPanel1 extends javax.swing.JPanel {
             }
         
             jList1.setListData(elements);
-        } catch (DataDBException ex) {
+        } catch (MessageException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при отображении сообщений!", "Ошибка", 1);
         }
         this.updateUI();
@@ -186,9 +190,9 @@ public class AboutGroupJPanel1 extends javax.swing.JPanel {
             try
         {
                try {
-                mdb.DeleteMessage(GML.get(jList1.getSelectedIndex()).getMessageID());
+                mdb.DeleteMessage(GML.get(jList1.getSelectedIndex()));
                 try {
-                    GML = mdb.GetGroupMessageTo(group.getID());
+                    GML = mdb.GetGroupMessageTo(group);
                     int size = GML.size();
                     for (int i = 0; i < size; i++) {
                         elements.add(GML.get(i).getSender().getFirstName() + " " + GML.get(i).getSender().getLastName() + ": " + GML.get(i).getMessageData());
@@ -196,10 +200,10 @@ public class AboutGroupJPanel1 extends javax.swing.JPanel {
 
                     jList1.setListData(elements);
                     jList1.updateUI();
-                } catch (DataDBException ex) {
+                } catch (MessageException ex) {
                     JOptionPane.showMessageDialog(null, "Ошибка при отображении сообщений!", "Ошибка", 1);
                 }
-            } catch (DataDBException ex) {
+            } catch (MessageException ex) {
                 JOptionPane.showMessageDialog(null, "Ошибка при удалении сообщения!", "Ошибка", 1);
             }
             
@@ -243,7 +247,7 @@ public class AboutGroupJPanel1 extends javax.swing.JPanel {
         jLabelFName.setText(group.getName());
         jTextArea1.setText(group.getAbout());
         try {
-            GML = mdb.GetGroupMessageTo(group.getID());
+            GML = mdb.GetGroupMessageTo(group);
             int size = GML.size();
             for(int i=0;i<size;i++)
             {
@@ -251,19 +255,12 @@ public class AboutGroupJPanel1 extends javax.swing.JPanel {
             }
         
             jList1.setListData(elements);
-        } catch (DataDBException ex) {
+        } catch (MessageException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при отображении сообщений!", "Ошибка", 1);
         }
-        groupInvDBWorker gidb = new groupInvDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+        GroupCatalog gidb = new GroupCatalog();
         try {
-            boolean contains = false;
-            int i=0;
-            for(i=0;i<gidb.GetAllUser(group.getID()).size();i++)
-            {
-                if(gidb.GetAllUser(group.getID()).get(0).getID()==user.getID())
-                    contains = true;
-            }
-            if(contains)
+            if(gidb.contains(group, user))
             {
                 
                 jPanel1.setVisible(true);
@@ -274,7 +271,7 @@ public class AboutGroupJPanel1 extends javax.swing.JPanel {
             }
             else
                 jPanel1.setVisible(false);
-        } catch (DataDBException ex) {
+        } catch (GroupException ex) {
             Logger.getLogger(AboutGroupJPanel1.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

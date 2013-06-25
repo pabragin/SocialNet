@@ -34,7 +34,7 @@ public class FriendshipDBWorkerTest {
         System.out.println("addRequest");
         int uID = 0;
         int rID = 0;
-        FriendshipDBWorker instance = new FriendshipDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+        FriendshipDBMapper instance = new FriendshipDBMapper("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
         instance.addRequest(uID, rID);
     }
 
@@ -46,7 +46,7 @@ public class FriendshipDBWorkerTest {
         System.out.println("ApproveRequest");
         int uID = 0;
         int aID = 0;
-        FriendshipDBWorker instance = new FriendshipDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+        FriendshipDBMapper instance = new FriendshipDBMapper("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
         instance.ApproveRequest(uID, aID);
     }
 

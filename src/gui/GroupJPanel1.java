@@ -4,6 +4,8 @@
  */
 package gui;
 
+import ServiceLayer.GroupCatalog;
+import ServiceLayer.GroupException;
 import business.Group;
 import business.User;
 import db.*;
@@ -25,7 +27,7 @@ public class GroupJPanel1 extends javax.swing.JPanel {
     private ArrayList<Group> GL;
     private Vector<String> elements = new Vector<String>();
     private AboutGroupJPanel1 aboutGroupJPanel;
-    private GroupDBWorker gdb;
+    private GroupCatalog gdb;
     private CreateGroupJPanel crGroupPan;
     
     private User user;
@@ -34,7 +36,7 @@ public class GroupJPanel1 extends javax.swing.JPanel {
         initComponents();
         setBounds(10,20,300,300);
         crGroupPan = new CreateGroupJPanel();
-        gdb = new GroupDBWorker();
+        gdb = new GroupCatalog();
         
         updateElements();
         aboutGroupJPanel = new AboutGroupJPanel1();
@@ -46,7 +48,7 @@ public class GroupJPanel1 extends javax.swing.JPanel {
     {
         try {
             GL = gdb.getAllGroups();
-        } catch (DataDBException ex) {
+        } catch (GroupException ex) {
             Logger.getLogger(GroupJPanel1.class.getName()).log(Level.SEVERE, null, ex);
         }
         elements.clear();
@@ -209,13 +211,13 @@ public class GroupJPanel1 extends javax.swing.JPanel {
                 {
                     elements.remove(jList2.getSelectedIndex());
                     try {
-                        gdb.DeleteGroup(GL.get(jList2.getSelectedIndex()).getID());
-                    } catch (DataDBException ex) {
+                        gdb.DeleteGroup(GL.get(jList2.getSelectedIndex()));
+                    } catch (GroupException ex) {
                         Logger.getLogger(MessegesJPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     try {
                         GL = gdb.getAllGroups();
-                    } catch (DataDBException ex) {
+                    } catch (GroupException ex) {
                         Logger.getLogger(MessegesJPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     jList2.updateUI();
@@ -245,13 +247,13 @@ public class GroupJPanel1 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void incomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incomeButtonActionPerformed
-        groupInvDBWorker gidb = new groupInvDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+        GroupCatalog gidb = new GroupCatalog();
         try {
             try
             {
-                gidb.addInvolve(user.getID(), GL.get(jList2.getSelectedIndex()).getID());
+                gidb.addInvolve(user, GL.get(jList2.getSelectedIndex()));
             JOptionPane.showMessageDialog(null, "Вы вступили в группу!", "Успех", 1);
-        } catch (DataDBException ex) {
+        } catch (GroupException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при вступлении в группу!", "Ошибка", 1);
         }
             }

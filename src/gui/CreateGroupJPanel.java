@@ -4,12 +4,10 @@
  */
 package gui;
 
+import ServiceLayer.GroupCatalog;
+import ServiceLayer.GroupException;
 import business.User;
-import db.DataDBException;
-import db.GroupDBWorker;
-import db.groupInvDBWorker;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -22,13 +20,13 @@ public class CreateGroupJPanel extends javax.swing.JPanel {
      * Creates new form CreateGroupJPanel
      */
     
-    private GroupDBWorker gdb;
+    private GroupCatalog gdb;
     private User user;
     
     public CreateGroupJPanel() {
         initComponents();
         setBounds(10,20,280,280);
-        gdb = new GroupDBWorker();
+        gdb = new GroupCatalog();
         
     }
     
@@ -109,10 +107,10 @@ public class CreateGroupJPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             int groupId = gdb.insertGroup(jTextField1.getText(), jTextArea1.getText(), user.getID());
-            groupInvDBWorker gidb = new groupInvDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
-            gidb.addInvolve(user.getID(), groupId);
+            GroupCatalog gidb = new GroupCatalog();
+            gidb.addInvolve(user, gdb.getGroupById(groupId));
             JOptionPane.showMessageDialog(null, "Группа успешно создана!", "Успех", 1);
-        } catch (DataDBException ex) {
+        } catch (GroupException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при создании группы!", "Ошибка", 1);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

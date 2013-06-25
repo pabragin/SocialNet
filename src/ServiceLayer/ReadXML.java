@@ -8,6 +8,7 @@ package ServiceLayer;
  *
  * @author Brasha
  */
+import business.User;
 import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -31,8 +32,53 @@ public class ReadXML {
         }
     }
     private static ArrayList<LengthCity> LC=new ArrayList<>();
+    
+    public boolean lengthExist(User current, User view)
+    {
+        ArrayList<LengthCity> LL= new ArrayList<>();
+        LL = new ReadXML().getAllLength();
+        boolean find=false;
+        int i=0;
+        System.out.println(LL.size());
+        for(i=0; i<LL.size(); i++)
+        {
+            
+            System.out.println(LL.get(i).fName+" "+(current.getCity()) + " "+ LL.get(i).sName+" "+(view.getCity()));
+            if((LL.get(i).fName == null ? (current.getCity()) == null : LL.get(i).fName.equals(current.getCity())) && (LL.get(i).sName == null ? (view.getCity()) == null : LL.get(i).sName.equals(view.getCity())))
+            {
+                find=true;
+                break;
+            }
+        }
+        return find;
+    }
+    
+    public String getLength(User current, User view)
+    {
+        ArrayList<LengthCity> LL= new ArrayList<>();
+        LL = new ReadXML().getAllLength();
+        boolean find=false;
+        int i=0;
+        System.out.println(LL.size());
+        for(i=0; i<LL.size(); i++)
+        {
+            
+            System.out.println(LL.get(i).fName+" "+(current.getCity()) + " "+ LL.get(i).sName+" "+(view.getCity()));
+            if((LL.get(i).fName == null ? (current.getCity()) == null : LL.get(i).fName.equals(current.getCity())) && (LL.get(i).sName == null ? (view.getCity()) == null : LL.get(i).sName.equals(view.getCity())))
+            {
+                find=true;
+                break;
+            }
+        }
+        if(find)
+        {
+            return String.valueOf(LL.get(i).length);
+        }
+        else
+            return null;
+    }
  
-   public ArrayList<LengthCity> getAllLength() {
+    public ArrayList<LengthCity> getAllLength() {
  
     try {
  

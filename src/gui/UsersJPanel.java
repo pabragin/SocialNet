@@ -4,14 +4,13 @@
  */
 package gui;
 
+import ServiceLayer.UserCatalog;
+import ServiceLayer.UserException;
 import business.User;
 import db.DataDBException;
-import db.FriendshipDBWorker;
-import db.UserDBWorker;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,18 +20,22 @@ import javax.swing.JOptionPane;
 public class UsersJPanel extends javax.swing.JPanel {
 
     private User user;
-    private UserDBWorker udb;
+    private UserCatalog udb;
     private ArrayList<User> LU;
     private AboutUserJPanel aboutUserJPanel;
     /**
      * Creates new form UsersJPanel
      */
-    public UsersJPanel(User us) throws DataDBException {
+    public UsersJPanel(User us) {
         initComponents();
         setBounds(10,20,300,300);
         user =us;
-        udb = new UserDBWorker();
-        LU = udb.getAllUsers();
+        udb = new UserCatalog();
+        try {
+            LU = udb.getAllUsers();
+        } catch (UserException ex) {
+            JOptionPane.showMessageDialog(null, "Ошибка при запросе списка пользователей!", "Ошибка!", 1);
+        }
         int size = LU.size();
         String elements[];
         elements = new String[size];
@@ -152,11 +155,10 @@ public class UsersJPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         User selectedUser = LU.get(jList1.getSelectedIndex());
         user.addFriend(selectedUser);
-        FriendshipDBWorker fDBW = new FriendshipDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
         try {
-            fDBW.addRequest(user.getID(), selectedUser.getID());
+            udb.addRequest(user, selectedUser);
             JOptionPane.showMessageDialog(null, "Заявка подана!", "Успех!", 1);
-        } catch (DataDBException ex) {
+        } catch (UserException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при отправке заявки!", "Ошибка!", 1);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

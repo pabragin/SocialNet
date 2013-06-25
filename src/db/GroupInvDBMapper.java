@@ -16,27 +16,27 @@ import java.util.logging.Logger;
  *
  * @author Brasha
  */
-public class groupInvDBWorker {
+public class GroupInvDBMapper {
     private Statement statement = null;
     private ResultSet resultSet = null;
     
     private Connection cConnection;
     
-    public groupInvDBWorker(String adress, String name, String password)
+    public GroupInvDBMapper(String adress, String name, String password)
     {
         try {
             try {
                 Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             } catch (    InstantiationException | IllegalAccessException ex) {
-                Logger.getLogger(groupInvDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GroupInvDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
                 cConnection = DriverManager.getConnection(adress, name, password);
             } catch (SQLException ex) {
-                Logger.getLogger(groupInvDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GroupInvDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(groupInvDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GroupInvDBMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void addInvolve(int uID,int gID) throws DataDBException{
@@ -118,7 +118,7 @@ public class groupInvDBWorker {
             String Data=null;
             ArrayList<User> LU = new ArrayList<>();
             
-            UserDBWorker udb = new UserDBWorker();
+            UserDBMapper udb = new UserDBMapper();
             
             while (result.next()) {
                 fid = result.getInt("USERID");
@@ -153,7 +153,7 @@ public class groupInvDBWorker {
             String Data=null;
             ArrayList<Group> LG = new ArrayList<>();
             
-            GroupDBWorker gdb = new GroupDBWorker();
+            GroupDBMapper gdb = new GroupDBMapper();
             
             while (result.next()) {
                 //fid = result.getInt("USERID");

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Brasha
  */
-public class GroupDBWorker {
+public class GroupDBMapper {
     private Statement statement = null;
     private ResultSet resultSet = null;
     
@@ -35,7 +35,7 @@ public class GroupDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -56,7 +56,7 @@ public class GroupDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -78,7 +78,7 @@ public class GroupDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -117,7 +117,7 @@ public class GroupDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -154,7 +154,7 @@ public class GroupDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -190,7 +190,7 @@ public class GroupDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -220,7 +220,7 @@ public class GroupDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }

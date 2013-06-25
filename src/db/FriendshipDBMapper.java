@@ -15,27 +15,27 @@ import java.util.logging.Logger;
  *
  * @author Brasha
  */
-public class FriendshipDBWorker {
+public class FriendshipDBMapper {
     private Statement statement = null;
     private ResultSet resultSet = null;
     
     private Connection cConnection;
     
-    public FriendshipDBWorker(String adress, String name, String password)
+    public FriendshipDBMapper(String adress, String name, String password)
     {
         try {
             try {
                 Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             } catch (    InstantiationException | IllegalAccessException ex) {
-                Logger.getLogger(FriendshipDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FriendshipDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
                 cConnection = DriverManager.getConnection(adress, name, password);
             } catch (SQLException ex) {
-                Logger.getLogger(FriendshipDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FriendshipDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FriendshipDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FriendshipDBMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void addRequest(int uID,int rID) throws DataDBException{
@@ -63,10 +63,10 @@ public class FriendshipDBWorker {
                 try {
                     Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
                 } catch (        InstantiationException | IllegalAccessException ex) {
-                    Logger.getLogger(FriendshipDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(FriendshipDBMapper.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(FriendshipDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FriendshipDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             String query = "UPDATE APP.FRIENDSHIP SET STATUS=1 WHERE (USERID=? AND RECIPIENTID=?)";
             PreparedStatement stat = connect.prepareStatement(query);
@@ -162,7 +162,7 @@ public class FriendshipDBWorker {
             String Data=null;
             ArrayList<User> LU = new ArrayList<>();
             
-            UserDBWorker udb = new UserDBWorker();
+            UserDBMapper udb = new UserDBMapper();
             
             while (result.next()) {
                 status = result.getInt("STATUS");
@@ -201,7 +201,7 @@ public class FriendshipDBWorker {
             String Data=null;
             ArrayList<User> LU = new ArrayList<>();
             
-            UserDBWorker udb = new UserDBWorker();
+            UserDBMapper udb = new UserDBMapper();
             
             while (result.next()) {
                 status = result.getInt("STATUS");

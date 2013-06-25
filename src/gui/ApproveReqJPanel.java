@@ -4,16 +4,14 @@
  */
 package gui;
 
+import ServiceLayer.UserCatalog;
+import ServiceLayer.UserException;
 import business.User;
-import db.DataDBException;
-import db.FriendshipDBWorker;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 
 /**
  *
@@ -25,7 +23,7 @@ public class ApproveReqJPanel extends javax.swing.JPanel {
      * Creates new form NewJPanel
      */
     private User user;
-    private FriendshipDBWorker fdb;
+    private UserCatalog fdb;
     private ArrayList<User> LR;
     Vector<String> elements;
     
@@ -34,10 +32,10 @@ public class ApproveReqJPanel extends javax.swing.JPanel {
         initComponents();
         setBounds(10,20,250,300);
         user =us;
-        fdb = new FriendshipDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+        fdb = new UserCatalog();
         try {
-            LR = fdb.GetRequestTo(user.getID());
-        } catch (DataDBException ex) {
+            LR = fdb.getRequestTo(user);
+        } catch (UserException ex) {
             Logger.getLogger(ApproveReqJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         int size = LR.size();
@@ -128,8 +126,8 @@ public class ApproveReqJPanel extends javax.swing.JPanel {
         if(elements.size()>0)
         {
             try {
-                fdb.DeleteRequest(user.getID(), LR.get(jList1.getSelectedIndex()).getID());
-            } catch (DataDBException ex) {
+                fdb.deleteRequest(user, LR.get(jList1.getSelectedIndex()));
+            } catch (UserException ex) {
                 Logger.getLogger(ApproveReqJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             LR.remove(jList1.getSelectedIndex());
@@ -146,9 +144,9 @@ public class ApproveReqJPanel extends javax.swing.JPanel {
         user.addFriend((LR.get(jList1.getSelectedIndex())));
         try {
             System.out.println(user.getID()+" "+LR.get(jList1.getSelectedIndex()).getID());
-            fdb.ApproveRequest(user.getID(), LR.get(jList1.getSelectedIndex()).getID());
+            fdb.approveRequest(user, LR.get(jList1.getSelectedIndex()));
             JOptionPane.showMessageDialog(null, "Заявка принята!", "Успех", 1);
-        } catch (DataDBException ex) {
+        } catch (UserException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при добавлении заявки!", "Ошибка", 1);
         }
         
@@ -160,8 +158,8 @@ public class ApproveReqJPanel extends javax.swing.JPanel {
     {
         elements.clear();
         try {
-            LR = fdb.GetRequestTo(user.getID());
-        } catch (DataDBException ex) {
+            LR = fdb.getRequestTo(user);
+        } catch (UserException ex) {
             Logger.getLogger(ApproveReqJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         int size = LR.size();

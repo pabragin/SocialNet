@@ -34,7 +34,7 @@ public class UserDBWorkerTest {
     @Test
     public void testInsertUser() throws Exception {
         System.out.println("insertUser");
-        UserDBWorker instance = new UserDBWorker();
+        UserDBMapper instance = new UserDBMapper();
         int id1, id2;
         String FName = "Pavel";
         String LName = "Bragin";
@@ -58,7 +58,7 @@ public class UserDBWorkerTest {
     public void testFindById() throws Exception {
         System.out.println("findById");
         int ID = 0;
-        UserDBWorker instance = new UserDBWorker();
+        UserDBMapper instance = new UserDBMapper();
         User result = instance.findById(ID);
     }
 
@@ -69,7 +69,7 @@ public class UserDBWorkerTest {
     public void testFindByFName() throws Exception {
         System.out.println("findByFName");
         String Name = "Pavel";
-        UserDBWorker instance = new UserDBWorker();
+        UserDBMapper instance = new UserDBMapper();
         ArrayList result = instance.findByFName(Name);
     }
 
@@ -80,7 +80,7 @@ public class UserDBWorkerTest {
     public void testFindByLastName() throws Exception {
         System.out.println("findByLastName");
         String Name = "Bragin";
-        UserDBWorker instance = new UserDBWorker();
+        UserDBMapper instance = new UserDBMapper();
         ArrayList result = instance.findByLastName(Name);
     }
 
@@ -91,7 +91,7 @@ public class UserDBWorkerTest {
     public void testFindByCity() throws Exception {
         System.out.println("findByCity");
         String Ci = "Sosnovy Bor";
-        UserDBWorker instance = new UserDBWorker();
+        UserDBMapper instance = new UserDBMapper();
         ArrayList result = instance.findByCity(Ci);
     }
     

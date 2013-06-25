@@ -4,10 +4,12 @@
  */
 package gui;
 
+import ServiceLayer.UserCatalog;
+import ServiceLayer.UserException;
 import business.User;
 import db.DataDBException;
-import db.FriendshipDBWorker;
-import db.UserDBWorker;
+import db.FriendshipDBMapper;
+import db.UserDBMapper;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -26,7 +28,7 @@ public class FriendsJPanel extends javax.swing.JPanel {
     private ArrayList<User> FL;
     private Vector<String> elements = new Vector<String>();
     private AboutUserJPanel aboutUserJPanel;
-    private FriendshipDBWorker fdb;
+    private UserCatalog fdb;
     private CreateMessageJPanel crMessPan;
     
     private User user;
@@ -35,7 +37,7 @@ public class FriendsJPanel extends javax.swing.JPanel {
         initComponents();
         setBounds(10,20,300,300);
         crMessPan = new CreateMessageJPanel();
-        fdb = new FriendshipDBWorker("jdbc:derby://localhost:1527/SocialNetwork", "pabragin", "147896321");
+        fdb = new UserCatalog();
         
         updateElements();
         aboutUserJPanel = new AboutUserJPanel();
@@ -46,8 +48,8 @@ public class FriendsJPanel extends javax.swing.JPanel {
     private void updateElements()
     {
         try {
-            FL = fdb.GetFriends(user.getID());
-        } catch (DataDBException ex) {
+            FL = fdb.getFriends(user);
+        } catch (UserException ex) {
             Logger.getLogger(FriendsJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         elements.clear();
@@ -178,13 +180,13 @@ public class FriendsJPanel extends javax.swing.JPanel {
         {
             elements.remove(jList2.getSelectedIndex());
             try {
-                fdb.DeleteFriend(user.getID(), FL.get(jList2.getSelectedIndex()).getID());
-            } catch (DataDBException ex) {
+                fdb.deleteFriend(user, FL.get(jList2.getSelectedIndex()));
+            } catch (UserException ex) {
                 Logger.getLogger(MessegesJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                FL = fdb.GetFriends(user.getID());
-            } catch (DataDBException ex) {
+                FL = fdb.getFriends(user);
+            } catch (UserException ex) {
                 Logger.getLogger(MessegesJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             updateElements();

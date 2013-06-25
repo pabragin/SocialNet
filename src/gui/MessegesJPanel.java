@@ -4,12 +4,11 @@
  */
 package gui;
 
-import business.Message;
+import ServiceLayer.MessageCatalog;
+import ServiceLayer.MessageException;
 import business.PrivateMessage;
 import business.User;
 import db.DataDBException;
-import db.MessagesDBWorker;
-import db.UserDBWorker;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -24,7 +23,7 @@ public class MessegesJPanel extends javax.swing.JPanel {
 
     
     private User user;
-    private MessagesDBWorker mdb;
+    private MessageCatalog mdb;
     private ArrayList<PrivateMessage> LM;
     private MessageJPanel messageJPanel;
     Vector elements;
@@ -36,10 +35,10 @@ public class MessegesJPanel extends javax.swing.JPanel {
         initComponents();
         setBounds(10,20,300,300);
         user =us;
-        mdb = new MessagesDBWorker();
+        mdb = new MessageCatalog();
         try {
-            LM = mdb.GetPrivateMessageTo(user.getID());
-        } catch (DataDBException ex) {
+            LM = mdb.GetPrivateMessageTo(user);
+        } catch (MessageException ex) {
             Logger.getLogger(MessegesJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         int size = LM.size();
@@ -171,13 +170,13 @@ public class MessegesJPanel extends javax.swing.JPanel {
         {
             elements.remove(jList1.getSelectedIndex());
             try {
-                mdb.DeleteMessage(LM.get(jList1.getSelectedIndex()).getMessageID());
-            } catch (DataDBException ex) {
+                mdb.DeleteMessage(LM.get(jList1.getSelectedIndex()));
+            } catch (MessageException ex) {
                 Logger.getLogger(MessegesJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                LM = mdb.GetPrivateMessageTo(user.getID());
-            } catch (DataDBException ex) {
+                LM = mdb.GetPrivateMessageTo(user);
+            } catch (MessageException ex) {
                 Logger.getLogger(MessegesJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             jList1.updateUI();
@@ -191,8 +190,8 @@ public class MessegesJPanel extends javax.swing.JPanel {
     public void startPress()
     {
         try {
-            LM = mdb.GetPrivateMessageTo(user.getID());
-        } catch (DataDBException ex) {
+            LM = mdb.GetPrivateMessageTo(user);
+        } catch (MessageException ex) {
             JOptionPane.showMessageDialog(null, "Ошибка при чтении сообщений!", "Ошибка", 1);
         }
         int size = LM.size();

@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author Brasha
  */
-public class MessagesDBWorker {
+public class MessagesDBMapper {
     
      private Statement statement = null;
     private ResultSet resultSet = null;
@@ -35,7 +35,7 @@ public class MessagesDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -56,7 +56,7 @@ public class MessagesDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -78,7 +78,7 @@ public class MessagesDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -100,7 +100,7 @@ public class MessagesDBWorker {
             User From=null;
             User to=null;
             String Data=null;
-            UserDBWorker udb = new UserDBWorker();
+            UserDBMapper udb = new UserDBMapper();
             
             while (result.next()) {
                 id = result.getInt("ID");
@@ -125,7 +125,7 @@ public class MessagesDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -147,8 +147,8 @@ public class MessagesDBWorker {
             User From=null;
             Group to=null;
             String Data=null;
-            UserDBWorker udb = new UserDBWorker();
-            GroupDBWorker gdb = new GroupDBWorker();
+            UserDBMapper udb = new UserDBMapper();
+            GroupDBMapper gdb = new GroupDBMapper();
             
             while (result.next()) {
                 id = result.getInt("ID");
@@ -173,7 +173,7 @@ public class MessagesDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -197,7 +197,7 @@ public class MessagesDBWorker {
             String Data=null;
             ArrayList<PrivateMessage> LP = new ArrayList<>();
             
-            UserDBWorker udb = new UserDBWorker();
+            UserDBMapper udb = new UserDBMapper();
             
             while (result.next()) {
                 id = result.getInt("ID");
@@ -219,7 +219,7 @@ public class MessagesDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -243,7 +243,7 @@ public class MessagesDBWorker {
             String Data=null;
             ArrayList<PrivateMessage> LP = new ArrayList<>();
             
-            UserDBWorker udb = new UserDBWorker();
+            UserDBMapper udb = new UserDBMapper();
             
             while (result.next()) {
                 id = result.getInt("ID");
@@ -265,7 +265,7 @@ public class MessagesDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -289,8 +289,8 @@ public class MessagesDBWorker {
             String Data=null;
             ArrayList<GroupMessage> LG = new ArrayList<>();
             
-            UserDBWorker udb = new UserDBWorker();
-            GroupDBWorker gdb = new GroupDBWorker();
+            UserDBMapper udb = new UserDBMapper();
+            GroupDBMapper gdb = new GroupDBMapper();
             
             while (result.next()) {
                 id = result.getInt("ID");
@@ -312,7 +312,7 @@ public class MessagesDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -336,8 +336,8 @@ public class MessagesDBWorker {
             String Data=null;
             ArrayList<GroupMessage> LG = new ArrayList<>();
             
-            UserDBWorker udb = new UserDBWorker();
-            GroupDBWorker gdb = new GroupDBWorker();
+            UserDBMapper udb = new UserDBMapper();
+            GroupDBMapper gdb = new GroupDBMapper();
             
             while (result.next()) {
                 id = result.getInt("ID");
@@ -359,7 +359,7 @@ public class MessagesDBWorker {
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -389,7 +389,7 @@ public class MessagesDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
@@ -419,7 +419,7 @@ public class MessagesDBWorker {
             try {
                 connect.close();
             } catch (SQLException ex) {
-                Logger.getLogger(UserDBWorker.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             close();
         }
